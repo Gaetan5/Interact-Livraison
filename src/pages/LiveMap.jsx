@@ -33,7 +33,7 @@ export default function LiveMap() {
     <section className="page-section">
       <h2 className="section-title">Carte en temps réel</h2>
       <div className="map-frame">
-        <MapContainer center={pos || [3.848, 11.502]} zoom={13} style={{ height: '100%', width: '100%' }}>
+        <MapContainer center={pos || [3.848, 11.502]} zoom={13} className="map-canvas">
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap" />
           <Locator position={pos} />
         </MapContainer>
