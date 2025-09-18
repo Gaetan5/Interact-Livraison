@@ -1,0 +1,13 @@
+:root { --bg: #0b1e39; --card:#12294a; --accent:#4ea1ff; --text:#f5f7fa; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); min-height: 100vh; display: grid; place-items: center; }
+.app-shell { background: var(--card); border-radius: 16px; padding: 32px; max-width: 640px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,.25); text-align: center; }
+.status-badge { display:inline-block; background: rgba(78,161,255,.15); color: var(--accent); border-radius: 999px; padding: 6px 12px; font-weight: 600; letter-spacing:.3px; margin-bottom:12px; }
+.heading { margin: 0 0 8px; font-size: 28px; }
+.subtext { margin: 0 0 20px; opacity: .85; }
+.primary-link { display:inline-block; background: var(--accent); color: #001a33; border: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration:none; }
+.action-row { display:flex; gap:12px; justify-content:center; align-items:center; margin-top:20px; flex-wrap:wrap; }
+@media (max-width: 480px) {
+  .app-shell { padding: 24px; }
+  .heading { font-size: 22px; }
+}
