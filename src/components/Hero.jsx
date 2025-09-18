@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useI18n } from '../state/I18nContext.jsx';
 
 export default function Hero() {
+  const { t } = useI18n();
   return (
     <section className="home-hero">
-      <h1 className="hero-title">Livrez, gagnez, étudiez serein</h1>
-      <p className="hero-subtext">Une plateforme pensée pour les étudiants au Cameroun: courses rapides, géolocalisation instantanée, paiements mobiles sécurisés.</p>
+      <h1 className="hero-title">{t('hero.title')}</h1>
+      <p className="hero-subtext">{t('hero.subtitle')}</p>
       <div className="hero-cta-row">
-        <Link className="primary-link" to="/devenir-livreur">Devenir livreur</Link>
-        <Link className="primary-link" to="/demander">Demander une course</Link>
+        <Link className="primary-link" to="/devenir-livreur">{t('hero.ctaCourier')}</Link>
+        <Link className="primary-link" to="/demander">{t('hero.ctaRequest')}</Link>
       </div>
     </section>
   );
