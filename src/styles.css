@@ -57,6 +57,20 @@ body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
   .hero-title { font-size: 22px; }
 }
 
+/* FAQ */
+.faq-section { background: var(--card); border:1px solid rgba(78,161,255,.2); border-radius: 16px; padding: 16px; width: min(860px, 92%); }
+.faq-list { display:grid; gap:8px; }
+.faq-item { background:#0e223f; border:1px solid rgba(78,161,255,.2); border-radius: 12px; padding: 10px 12px; }
+.faq-question { cursor: pointer; }
+.faq-answer { opacity:.9; margin-top: 8px; }
+
+/* Sticky CTA */
+.sticky-cta { position: fixed; left: 50%; transform: translateX(-50%); bottom: 12px; background: var(--card); border:1px solid rgba(78,161,255,.3); border-radius: 999px; padding: 10px 12px; display:flex; gap:10px; align-items:center; box-shadow: 0 10px 30px rgba(0,0,0,.35); z-index: 50; }
+.sticky-text { opacity:.95; }
+
+/* Map canvas */
+.map-canvas { height: 100%; width: 100%; }
+
 .account-chip { display:flex; align-items:center; gap:8px; }
 .chip-badge { background: rgba(78,161,255,.15); color: var(--accent); padding: 4px 8px; border-radius: 999px; font-weight: 700; }
 .chip-text { opacity:.9; }
