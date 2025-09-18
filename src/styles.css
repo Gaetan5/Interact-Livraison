@@ -30,7 +30,7 @@ body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
 .wallet-balance { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
 .balance-label { opacity:.9; }
 .balance-amount { font-weight:800; color: var(--accent); }
-.map-placeholder { height: 260px; border-radius: 12px; background: repeating-linear-gradient(45deg, rgba(78,161,255,.1) 0 10px, rgba(78,161,255,.15) 10px 20px); display:grid; place-items:center; color: var(--text); }
+.map-frame { height: 360px; border-radius: 12px; overflow: hidden; border:1px solid rgba(78,161,255,.2); }
 
 .account-chip { display:flex; align-items:center; gap:8px; }
 .chip-badge { background: rgba(78,161,255,.15); color: var(--accent); padding: 4px 8px; border-radius: 999px; font-weight: 700; }
