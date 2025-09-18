@@ -21,7 +21,9 @@ export default function App() {
             <Link className="nav-link" to="/carte">Carte live</Link>
             <Link className="nav-link" to="/portefeuille">Portefeuille</Link>
           </nav>
-          <AuthPanel />
+          <div className="nav-right">
+            <AuthPanel />
+          </div>
         </header>
         <div className="page-wrap">
           <Routes>
