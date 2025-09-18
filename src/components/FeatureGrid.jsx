@@ -1,8 +1,11 @@
+import { useI18n } from '../state/I18nContext.jsx';
+
 export default function FeatureGrid() {
+  const { t } = useI18n();
   const items = [
-    { title: 'Gains flexibles', text: 'Choisissez vos disponibilités. Gagnez sur chaque course + bonus.', icon: '💼' },
-    { title: 'Localisation instantanée', text: 'Suivi en temps réel pour livrer plus vite et en sécurité.', icon: '📍' },
-    { title: 'Paiements mobiles', text: 'MTN MoMo et Orange Money pris en charge pour recharges et retraits.', icon: '💳' },
+    { title: t('features.gainsTitle'), text: t('features.gainsText'), icon: '💼' },
+    { title: t('features.geoTitle'), text: t('features.geoText'), icon: '📍' },
+    { title: t('features.payTitle'), text: t('features.payText'), icon: '💳' },
   ];
   return (
     <section className="feature-grid">
