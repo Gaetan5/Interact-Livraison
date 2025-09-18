@@ -2,6 +2,8 @@ import { supabase } from '../lib/supabase.js';
 import Hero from '../components/Hero.jsx';
 import FeatureGrid from '../components/FeatureGrid.jsx';
 import Steps from '../components/Steps.jsx';
+import FAQ from '../components/FAQ.jsx';
+import StickyCTA from '../components/StickyCTA.jsx';
 
 export default function Home() {
   const connected = !!supabase;
@@ -20,6 +22,8 @@ export default function Home() {
       <Hero />
       <FeatureGrid />
       <Steps />
+      <FAQ />
+      <StickyCTA />
     </div>
   );
 }
