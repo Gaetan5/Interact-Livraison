@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { loadState, saveState } from '../lib/storage.js';
+import { supabase } from '../lib/supabase.js';
 
 const AuthCtx = createContext(null);
 
@@ -14,13 +15,26 @@ export function AuthProvider({ children }) {
 
   useEffect(() => { saveState(data); }, [data]);
 
-  const signIn = (phone) => {
+  const signIn = async (phone) => {
     setPendingPhone(phone);
-    return true; // trigger OTP step
+    if (supabase) {
+      const { error } = await supabase.auth.signInWithOtp({ phone, options: { channel: 'sms' } });
+      if (error) return false;
+    }
+    return true; // prompt OTP step regardless; fallback uses demo code
   };
 
-  const verifyOtp = (code) => {
-    if (code === '123456' && pendingPhone) {
+  const verifyOtp = async (code) => {
+    if (!pendingPhone) return false;
+    if (supabase) {
+      const { data: sessionData, error } = await supabase.auth.verifyOtp({ phone: pendingPhone, token: code, type: 'sms' });
+      if (error) return false;
+      const phone = sessionData?.user?.phone || pendingPhone;
+      setData((d) => ({ ...d, user: { phone, role: 'courier' } }));
+      setPendingPhone('');
+      return true;
+    }
+    if (code === '123456') {
       setData((d) => ({ ...d, user: { phone: pendingPhone, role: 'courier' } }));
       setPendingPhone('');
       return true;
