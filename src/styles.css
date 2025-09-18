@@ -32,6 +32,28 @@ body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
 .balance-amount { font-weight:800; color: var(--accent); }
 .map-placeholder { height: 260px; border-radius: 12px; background: repeating-linear-gradient(45deg, rgba(78,161,255,.1) 0 10px, rgba(78,161,255,.15) 10px 20px); display:grid; place-items:center; color: var(--text); }
 
+.account-chip { display:flex; align-items:center; gap:8px; }
+.chip-badge { background: rgba(78,161,255,.15); color: var(--accent); padding: 4px 8px; border-radius: 999px; font-weight: 700; }
+.chip-text { opacity:.9; }
+.chip-action { background: transparent; border: 1px solid rgba(78,161,255,.35); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; }
+.auth-box { display:flex; align-items:center; gap:8px; }
+.auth-row { display:flex; gap:8px; }
+.error-text { color:#ff8585; }
+
+.tx-list { margin-top: 16px; display:grid; gap:8px; }
+.tx-row { display:grid; grid-template-columns: 1fr auto auto; gap:10px; align-items:center; background:#0e223f; border:1px solid rgba(78,161,255,.2); border-radius: 10px; padding: 10px 12px; }
+.tx-type { font-weight: 700; }
+.t-credit { color: #70ffb2; }
+.t-debit { color: #ff9a9a; }
+.tx-note { opacity:.9; }
+.tx-date { opacity:.7; font-size: 12px; }
+
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); display:grid; place-items:center; padding: 20px; }
+.modal-card { background: var(--card); border: 1px solid rgba(78,161,255,.2); border-radius: 16px; width: min(560px, 96%); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.modal-head { display:flex; align-items:center; justify-content:space-between; padding: 14px 16px; border-bottom: 1px solid rgba(78,161,255,.2); }
+.modal-title { margin:0; font-size: 18px; }
+.modal-body { padding: 16px; }
+
 @media (max-width: 480px) {
   .app-shell { padding: 24px; }
   .heading { font-size: 22px; }
