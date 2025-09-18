@@ -1,14 +1,33 @@
 import './styles.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import RequestDelivery from './pages/RequestDelivery.jsx';
+import BecomeCourier from './pages/BecomeCourier.jsx';
+import LiveMap from './pages/LiveMap.jsx';
+import Wallet from './pages/Wallet.jsx';
 
 export default function App() {
   return (
-    <main className="app-shell">
-      <div className="status-badge">Environment ready</div>
-      <h1 className="heading">Your dev server is live</h1>
-      <p className="subtext">This minimal app runs on port 3000. You can now add your framework of choice later.</p>
-      <div className="action-row">
-        <a className="primary-link" href="/">Refresh</a>
+    <BrowserRouter>
+      <header className="top-nav">
+        <div className="brand">Interact Livraison</div>
+        <nav className="nav-links">
+          <Link className="nav-link" to="/">Accueil</Link>
+          <Link className="nav-link" to="/demander">Demander</Link>
+          <Link className="nav-link" to="/devenir-livreur">Devenir livreur</Link>
+          <Link className="nav-link" to="/carte">Carte live</Link>
+          <Link className="nav-link" to="/portefeuille">Portefeuille</Link>
+        </nav>
+      </header>
+      <div className="page-wrap">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/demander" element={<RequestDelivery />} />
+          <Route path="/devenir-livreur" element={<BecomeCourier />} />
+          <Route path="/carte" element={<LiveMap />} />
+          <Route path="/portefeuille" element={<Wallet />} />
+        </Routes>
       </div>
-    </main>
+    </BrowserRouter>
   );
 }

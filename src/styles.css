@@ -1,12 +1,37 @@
 :root { --bg: #0b1e39; --card:#12294a; --accent:#4ea1ff; --text:#f5f7fa; }
 * { box-sizing: border-box; }
-body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); min-height: 100vh; display: grid; place-items: center; }
+body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* Top navigation */
+.top-nav { position: sticky; top:0; background: rgba(18,41,74,.9); backdrop-filter: blur(6px); display:flex; align-items:center; justify-content:space-between; padding: 12px 16px; border-bottom: 1px solid rgba(78,161,255,.2); }
+.brand { font-weight: 800; letter-spacing:.4px; color: var(--text); }
+.nav-links { display:flex; gap:10px; flex-wrap: wrap; }
+.nav-link { color: var(--text); text-decoration:none; padding: 8px 10px; border-radius: 10px; }
+.nav-link:hover { background: rgba(78,161,255,.15); color: var(--accent); }
+
+/* Layout and sections */
+.page-wrap { display: grid; place-items: center; padding: 24px; }
 .app-shell { background: var(--card); border-radius: 16px; padding: 32px; max-width: 640px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,.25); text-align: center; }
 .status-badge { display:inline-block; background: rgba(78,161,255,.15); color: var(--accent); border-radius: 999px; padding: 6px 12px; font-weight: 600; letter-spacing:.3px; margin-bottom:12px; }
 .heading { margin: 0 0 8px; font-size: 28px; }
 .subtext { margin: 0 0 20px; opacity: .85; }
 .primary-link { display:inline-block; background: var(--accent); color: #001a33; border: none; padding: 10px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration:none; }
 .action-row { display:flex; gap:12px; justify-content:center; align-items:center; margin-top:20px; flex-wrap:wrap; }
+
+.page-section { background: var(--card); border-radius: 16px; padding: 24px; width: min(860px, 92%); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.section-title { margin: 0 0 12px; font-size: 22px; }
+.section-subtext { opacity:.85; margin: 4px 0 16px; }
+.form-grid { display:grid; grid-template-columns: 1fr; gap: 12px; }
+.form-field { display:flex; flex-direction:column; gap:6px; }
+.label-text { opacity:.9; }
+.input-control { background:#0e223f; color: var(--text); border: 1px solid rgba(78,161,255,.2); border-radius: 10px; padding: 10px 12px; }
+.input-control:focus { outline:none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(78,161,255,.15); }
+.wallet-card { background:#0e223f; border:1px solid rgba(78,161,255,.2); border-radius: 16px; padding: 16px; }
+.wallet-balance { display:flex; align-items:center; justify-content:space-between; margin-bottom: 12px; }
+.balance-label { opacity:.9; }
+.balance-amount { font-weight:800; color: var(--accent); }
+.map-placeholder { height: 260px; border-radius: 12px; background: repeating-linear-gradient(45deg, rgba(78,161,255,.1) 0 10px, rgba(78,161,255,.15) 10px 20px); display:grid; place-items:center; color: var(--text); }
+
 @media (max-width: 480px) {
   .app-shell { padding: 24px; }
   .heading { font-size: 22px; }
