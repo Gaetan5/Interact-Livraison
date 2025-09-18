@@ -1,8 +1,11 @@
+import { useI18n } from '../state/I18nContext.jsx';
+
 export default function Steps() {
+  const { t } = useI18n();
   const steps = [
-    { title: '1. Publiez', text: 'Le client décrit le retrait et la livraison (adresse, détails, prix estimé).' },
-    { title: '2. Assignez', text: 'Le livreur proche accepte. Suivi live et notifications.' },
-    { title: '3. Livrez & créditez', text: 'À la livraison, le portefeuille du livreur est crédité. Commissions automatiques.' },
+    { title: t('steps.s1t'), text: t('steps.s1d') },
+    { title: t('steps.s2t'), text: t('steps.s2d') },
+    { title: t('steps.s3t'), text: t('steps.s3d') },
   ];
   return (
     <section className="steps">
