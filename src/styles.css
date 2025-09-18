@@ -32,6 +32,29 @@ body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
 .balance-amount { font-weight:800; color: var(--accent); }
 .map-frame { height: 360px; border-radius: 12px; overflow: hidden; border:1px solid rgba(78,161,255,.2); }
 
+/* Home sections */
+.home-page { display:grid; gap: 20px; place-items: center; padding: 20px; }
+.home-hero { background: linear-gradient(180deg, rgba(78,161,255,.12), rgba(78,161,255,0)); border: 1px solid rgba(78,161,255,.2); border-radius: 16px; padding: 24px; width: min(860px, 92%); box-shadow: 0 10px 30px rgba(0,0,0,.25); text-align: center; }
+.hero-title { margin: 0 0 8px; font-size: 28px; }
+.hero-subtext { opacity:.9; margin: 0 0 16px; }
+.hero-cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+.feature-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: min(860px, 92%); }
+.feature-card { background:#0e223f; border:1px solid rgba(78,161,255,.2); border-radius: 16px; padding: 16px; }
+.feature-icon { font-size: 22px; }
+.feature-title { margin:6px 0 4px; font-size: 18px; }
+.feature-text { opacity:.9; }
+
+.steps { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: min(860px, 92%); }
+.step-item { background: var(--card); border:1px solid rgba(78,161,255,.2); border-radius: 16px; padding: 16px; }
+.step-title { margin:0 0 6px; font-size: 16px; color: var(--accent); }
+.step-text { opacity:.9; }
+
+@media (max-width: 680px) {
+  .feature-grid, .steps { grid-template-columns: 1fr; }
+  .hero-title { font-size: 22px; }
+}
+
 .account-chip { display:flex; align-items:center; gap:8px; }
 .chip-badge { background: rgba(78,161,255,.15); color: var(--accent); padding: 4px 8px; border-radius: 999px; font-weight: 700; }
 .chip-text { opacity:.9; }
