@@ -22,13 +22,13 @@ export default function AuthPanel() {
   return (
     <div className="auth-box">
       {step === 'phone' && (
-        <form onSubmit={(e)=>{e.preventDefault(); setErr(''); if(signIn(phone)){ setStep('otp'); }}} className="auth-row">
+        <form onSubmit={async (e)=>{e.preventDefault(); setErr(''); const ok = await signIn(phone); if(ok){ setStep('otp'); } else { setErr('Impossible d’envoyer l’OTP'); } }} className="auth-row">
           <input className="input-control" value={phone} onChange={(e)=>setPhone(e.target.value)} placeholder="Téléphone (Ex: 6xx xxx xxx)" />
           <button className="primary-link" type="submit">Recevoir OTP</button>
         </form>
       )}
       {step === 'otp' && (
-        <form onSubmit={(e)=>{e.preventDefault(); setErr(''); if(!verifyOtp(code)){ setErr('Code invalide. Utilisez 123456'); }}} className="auth-row">
+        <form onSubmit={async (e)=>{e.preventDefault(); setErr(''); const ok = await verifyOtp(code); if(!ok){ setErr('Code invalide. Utilisez 123456'); } }} className="auth-row">
           <input className="input-control" value={code} onChange={(e)=>setCode(e.target.value)} placeholder="Code OTP (123456)" />
           <button className="primary-link" type="submit">Valider</button>
         </form>
