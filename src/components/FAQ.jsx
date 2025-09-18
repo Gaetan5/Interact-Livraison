@@ -1,12 +1,15 @@
+import { useI18n } from '../state/I18nContext.jsx';
+
 export default function FAQ() {
+  const { t } = useI18n();
   const faqs = [
-    { q: 'Comment devenir livreur ?', a: 'Inscrivez-vous avec votre numéro. Vérification simple (pièce/eng in plus tard). Vous choisissez vos disponibilités.' },
-    { q: 'Comment sont gérés les paiements ?', a: 'Portefeuille crédité après livraison. Retraits via MTN MoMo ou Orange Money. Commissions appliquées automatiquement.' },
-    { q: 'Est-ce compatible avec les études ?', a: 'Oui, le modèle est flexible: activez-vous quand vous êtes disponible (soirées, week-end, entre les cours).' },
+    { q: t('faq.q1'), a: t('faq.a1') },
+    { q: t('faq.q2'), a: t('faq.a2') },
+    { q: t('faq.q3'), a: t('faq.a3') },
   ];
   return (
     <section className="faq-section">
-      <h2 className="section-title">Questions fréquentes</h2>
+      <h2 className="section-title">{t('faq.title')}</h2>
       <div className="faq-list">
         {faqs.map((f) => (
           <details className="faq-item" key={f.q}>
