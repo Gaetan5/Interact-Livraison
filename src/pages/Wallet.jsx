@@ -1,16 +1,59 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../state/AuthContext.jsx';
+import { supabase } from '../lib/supabase.js';
+import { getWallet, getTransactions, walletCredit, walletDebit } from '../lib/db.js';
 
 export default function Wallet() {
   const { user, wallet, credit, debit } = useAuth();
   const [showTopUp, setShowTopUp] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
   const [amount, setAmount] = useState('');
+  const [remoteTx, setRemoteTx] = useState([]);
+  const [remoteBalance, setRemoteBalance] = useState(null);
 
-  const formatted = useMemo(() => new Intl.NumberFormat('fr-FR').format(wallet.balance), [wallet.balance]);
+  useEffect(() => {
+    (async () => {
+      if (supabase && user) {
+        const w = await getWallet();
+        if (w.ok) setRemoteBalance(w.data?.balance ?? 0);
+        const tx = await getTransactions();
+        if (tx.ok) setRemoteTx(tx.data || []);
+      }
+    })();
+  }, [user]);
 
-  const submitTopUp = (e) => { e.preventDefault(); if (credit(amount, { note: 'Recharge manuelle' })) { setAmount(''); setShowTopUp(false); } };
-  const submitWithdraw = (e) => { e.preventDefault(); if (debit(amount, { note: 'Retrait manuel' })) { setAmount(''); setShowWithdraw(false); } };
+  const formatted = useMemo(() => {
+    const val = supabase && user && remoteBalance !== null ? remoteBalance : wallet.balance;
+    return new Intl.NumberFormat('fr-FR').format(val);
+  }, [wallet.balance, remoteBalance, user]);
+
+  const submitTopUp = async (e) => {
+    e.preventDefault();
+    if (supabase && user) {
+      const res = await walletCredit(Number(amount), 'Recharge manuelle');
+      if (res.ok) {
+        const w = await getWallet(); if (w.ok) setRemoteBalance(w.data?.balance ?? 0);
+        const tx = await getTransactions(); if (tx.ok) setRemoteTx(tx.data || []);
+        setAmount(''); setShowTopUp(false);
+      }
+      return;
+    }
+    if (credit(amount, { note: 'Recharge manuelle' })) { setAmount(''); setShowTopUp(false); }
+  };
+
+  const submitWithdraw = async (e) => {
+    e.preventDefault();
+    if (supabase && user) {
+      const res = await walletDebit(Number(amount), 'Retrait manuel');
+      if (res.ok) {
+        const w = await getWallet(); if (w.ok) setRemoteBalance(w.data?.balance ?? 0);
+        const tx = await getTransactions(); if (tx.ok) setRemoteTx(tx.data || []);
+        setAmount(''); setShowWithdraw(false);
+      }
+      return;
+    }
+    if (debit(amount, { note: 'Retrait manuel' })) { setAmount(''); setShowWithdraw(false); }
+  };
 
   return (
     <section className="page-section">
@@ -26,7 +69,7 @@ export default function Wallet() {
         </div>
       </div>
       {!user && <p className="section-subtext">Connectez-vous pour synchroniser votre solde et retraits.</p>}
-      <TransactionList items={wallet.transactions} />
+      {supabase && user ? <TransactionList items={remoteTx} remote /> : <TransactionList items={wallet.transactions} />}
 
       {showTopUp && (
         <Modal onClose={()=>setShowTopUp(false)} title="Recharger">
@@ -56,7 +99,7 @@ function TransactionList({ items }) {
         <div key={tx.id} className="tx-row">
           <span className={`tx-type ${tx.type === 'credit' ? 't-credit' : 't-debit'}`}>{tx.type === 'credit' ? '+ ' : '- '}{new Intl.NumberFormat('fr-FR').format(tx.amount)} FCFA</span>
           <span className="tx-note">{tx.note || '—'}</span>
-          <span className="tx-date">{new Date(tx.at).toLocaleString('fr-FR')}</span>
+          <span className="tx-date">{new Date(tx.created_at || tx.at).toLocaleString('fr-FR')}</span>
         </div>
       ))}
     </div>
