@@ -1,5 +1,5 @@
 import './styles.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { AuthProvider } from './state/AuthContext.jsx';
 import { ThemeProvider } from './state/ThemeContext.jsx';
 import { I18nProvider, useI18n } from './state/I18nContext.jsx';
@@ -17,14 +17,15 @@ function Shell() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <header className="top-nav">
-          <div className="brand">{t('brand')}</div>
-          <nav className="nav-links">
-            <Link className="nav-link" to="/">{t('nav.home')}</Link>
-            <Link className="nav-link" to="/demander">{t('nav.request')}</Link>
-            <Link className="nav-link" to="/devenir-livreur">{t('nav.courier')}</Link>
-            <Link className="nav-link" to="/carte">{t('nav.map')}</Link>
-            <Link className="nav-link" to="/portefeuille">{t('nav.wallet')}</Link>
+        <header className="top-nav" role="banner">
+          <a href="#main" className="skip-link">Aller au contenu</a>
+          <Link className="brand" to="/" aria-label={t('nav.home')}>{t('brand')}</Link>
+          <nav className="nav-links" aria-label="Navigation principale">
+            <NavLink className={({isActive}) => `nav-link${isActive ? ' is-active' : ''}`} to="/">{t('nav.home')}</NavLink>
+            <NavLink className={({isActive}) => `nav-link${isActive ? ' is-active' : ''}`} to="/demander">{t('nav.request')}</NavLink>
+            <NavLink className={({isActive}) => `nav-link${isActive ? ' is-active' : ''}`} to="/devenir-livreur">{t('nav.courier')}</NavLink>
+            <NavLink className={({isActive}) => `nav-link${isActive ? ' is-active' : ''}`} to="/carte">{t('nav.map')}</NavLink>
+            <NavLink className={({isActive}) => `nav-link${isActive ? ' is-active' : ''}`} to="/portefeuille">{t('nav.wallet')}</NavLink>
           </nav>
           <div className="nav-right">
             <LangSwitch />
@@ -32,7 +33,7 @@ function Shell() {
             <AuthPanel />
           </div>
         </header>
-        <div className="page-wrap">
+        <div className="page-wrap" id="main">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/demander" element={<RequestDelivery />} />
