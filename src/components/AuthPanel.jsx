@@ -23,17 +23,17 @@ export default function AuthPanel() {
     <div className="auth-box">
       {step === 'phone' && (
         <form onSubmit={async (e)=>{e.preventDefault(); setErr(''); const ok = await signIn(phone); if(ok){ setStep('otp'); } else { setErr('Impossible d’envoyer l’OTP'); } }} className="auth-row">
-          <input className="input-control" value={phone} onChange={(e)=>setPhone(e.target.value)} placeholder="Téléphone (Ex: 6xx xxx xxx)" />
+          <input className="input-control" type="tel" inputMode="tel" autoComplete="tel" aria-label="Numéro de téléphone" aria-invalid={!!err} value={phone} onChange={(e)=>setPhone(e.target.value)} placeholder="Téléphone (Ex: 6xx xxx xxx)" />
           <button className="primary-link" type="submit">Recevoir OTP</button>
         </form>
       )}
       {step === 'otp' && (
         <form onSubmit={async (e)=>{e.preventDefault(); setErr(''); const ok = await verifyOtp(code); if(!ok){ setErr('Code invalide. Utilisez 123456'); } }} className="auth-row">
-          <input className="input-control" value={code} onChange={(e)=>setCode(e.target.value)} placeholder="Code OTP (123456)" />
+          <input className="input-control" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" aria-label="Code de vérification" aria-invalid={!!err} value={code} onChange={(e)=>setCode(e.target.value)} placeholder="Code OTP (123456)" />
           <button className="primary-link" type="submit">Valider</button>
         </form>
       )}
-      {err && <div className="error-text">{err}</div>}
+      {err && <div className="error-text" role="alert" aria-live="polite">{err}</div>}
     </div>
   );
 }
