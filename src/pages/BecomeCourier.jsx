@@ -6,11 +6,11 @@ export default function BecomeCourier() {
       <form className="form-grid" onSubmit={(e)=>e.preventDefault()}>
         <label className="form-field">
           <span className="label-text">Nom complet</span>
-          <input className="input-control" placeholder="Ex: Jean Doe" />
+          <input className="input-control" type="text" autoComplete="name" placeholder="Ex: Jean Doe" />
         </label>
         <label className="form-field">
           <span className="label-text">Téléphone (OTP)</span>
-          <input className="input-control" placeholder="Ex: 6xx xxx xxx" />
+          <input className="input-control" type="tel" inputMode="tel" autoComplete="tel" placeholder="Ex: 6xx xxx xxx" />
         </label>
         <div className="action-row">
           <button className="primary-link" type="submit">Recevoir OTP</button>
